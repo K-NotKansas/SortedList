@@ -1,5 +1,7 @@
+import java.util.Arrays;
 public class SortedList {
     public static int searchDataSet(String[] toSearch, String searchFor) {
+        Arrays.sort(toSearch);
         int left = 0;
             int right = toSearch.length - 1;
         while (left <= right) {
