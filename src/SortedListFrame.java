@@ -42,7 +42,8 @@ public class SortedListFrame extends JFrame {
             ACTIONSAREA.add(SEARCH);
             ACTIONSAREA.add(RESULT);
             ACTIONSAREA.add(QUIT);
-        DATABAR.setText("Place a newline between each piece of data");
+        DATABAR.setText("Put your data here " +
+                "(Place a newline between each piece of data)");
             SEARCHBAR.setText("Input your query here");
         SEARCH.addActionListener((ActionEvent ae) -> {
             String LOOKFOR = SEARCHBAR.getText();
@@ -55,23 +56,14 @@ public class SortedListFrame extends JFrame {
             }
            String[] WOWITSALISTNOWSORTED = new String[WOWITSALISTNOW.size()];
                WOWITSALISTNOW.toArray(WOWITSALISTNOWSORTED);
-                 Arrays.sort(WOWITSALISTNOWSORTED);
-                 /*
-            INDEXOFQUERYFIRSTOCCURENCE = SortedList.searchDataSet(WOWITSALISTNOW, LOOKFOR.toLowerCase(Locale.ROOT));
-                RESULT.setText("String: " + LOOKFOR +
-                        " occurs at index: " + INDEXOFQUERYFIRSTOCCURENCE +
-                        " of your dataset " + "for the first time."  +
-                        "\n" + "Sorted dataset: " + WOWITSALISTNOWSORTED);
-        } );
-
-                  */
-                StringBuilder sortedDatasetBuilder = new StringBuilder();
-                for (String s : WOWITSALISTNOWSORTED) {
+               Arrays.sort(WOWITSALISTNOWSORTED);
+                    StringBuilder sortedDatasetBuilder = new StringBuilder();
+               for (String s : WOWITSALISTNOWSORTED) {
                     sortedDatasetBuilder.append(s).append("\n");
-                }
-                String SORTED_DATASET_TEXT = sortedDatasetBuilder.toString().trim();
-                INDEXOFQUERYFIRSTOCCURENCE = SortedList.searchDataSet(WOWITSALISTNOW, LOOKFOR.toLowerCase(Locale.ROOT));
-                RESULT.setText("String: " + LOOKFOR +
+               }
+               String SORTED_DATASET_TEXT = sortedDatasetBuilder.toString().trim();
+               INDEXOFQUERYFIRSTOCCURENCE = SortedList.searchDataSet(WOWITSALISTNOW, LOOKFOR.toLowerCase(Locale.ROOT));
+               RESULT.setText("String: " + LOOKFOR +
                         " occurs at index: " + INDEXOFQUERYFIRSTOCCURENCE +
                         " of your dataset for the first time."  +
                         "\n" + "Sorted dataset: \n" + SORTED_DATASET_TEXT);
