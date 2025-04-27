@@ -1,12 +1,15 @@
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
+    import java.awt.*;
+    import java.awt.event.ActionEvent;
+    import java.util.ArrayList;
+import java.util.Locale;
+
 public class SortedListFrame extends JFrame {
     JPanel MAIN;
         JPanel ACTIONSAREA;
         JTextArea SEARCHBAR,DATABAR,RESULT;
         JScrollPane RESULTPANE;
-        JButton SEARCH,QUIT;
+        JButton SEARCH,QUIT,ADDDATA;
         GridLayout LAYOUTMAIN, SUBLAYOUT0;
         int INDEXOFQUERYFIRSTOCCURENCE;
     public SortedListFrame(){
@@ -22,13 +25,13 @@ public class SortedListFrame extends JFrame {
     }
     public void BUILDACTIONSAREA(){
         ACTIONSAREA = new JPanel();
-        SUBLAYOUT0 = new GridLayout(3,2);
-        ACTIONSAREA.setLayout(SUBLAYOUT0);
-        DATABAR = new JTextArea();
-        SEARCHBAR = new JTextArea();
-        RESULT = new JTextArea();
-        SEARCH = new JButton("SEARCH");
-        QUIT = new JButton("QUIT");
+            SUBLAYOUT0 = new GridLayout(3,2);
+            ACTIONSAREA.setLayout(SUBLAYOUT0);
+            DATABAR = new JTextArea();
+            SEARCHBAR = new JTextArea();
+            RESULT = new JTextArea();
+            SEARCH = new JButton("SEARCH");
+            QUIT = new JButton("QUIT");
         RESULTPANE = new JScrollPane();
             RESULT.setEditable(false);
             RESULTPANE.add(RESULT);
@@ -37,14 +40,22 @@ public class SortedListFrame extends JFrame {
             ACTIONSAREA.add(SEARCH);
             ACTIONSAREA.add(RESULT);
             ACTIONSAREA.add(QUIT);
-        DATABAR.setText("Input your pieces of data here and press the appropriate button" + "\n" + "after every new piece");
-            SEARCHBAR.setText("Input your query here (case sensitive)");
+        DATABAR.setText("Place a newline between each piece of data");
+            SEARCHBAR.setText("Input your query here");
         SEARCH.addActionListener((ActionEvent ae) -> {
-            String SEPARATEBY = ",";
-                String lookFor = SEARCHBAR.getText();
-                String[] searchThis = new String[]{DATABAR.getText()};
-            INDEXOFQUERYFIRSTOCCURENCE = SortedList.searchDataSet(searchThis, lookFor);
-                RESULT.setText("String: " + lookFor + " occurs at index: " + INDEXOFQUERYFIRSTOCCURENCE + " of your dataset for the first time." );
+            String LOOKFOR = SEARCHBAR.getText();
+                ArrayList<String> WOWITSALISTNOW = new ArrayList<>();
+                String[] IAMMAKINGTHISINTOANARRAYLIST = DATABAR.getText().split("\n");
+            for (String entry : IAMMAKINGTHISINTOANARRAYLIST) {
+                if (!entry.trim().isEmpty()) {
+                    WOWITSALISTNOW.add(entry.trim().toLowerCase());
+                }
+            }
+            INDEXOFQUERYFIRSTOCCURENCE = SortedList.searchDataSet(WOWITSALISTNOW, LOOKFOR.toLowerCase(Locale.ROOT));
+                RESULT.setText("String: " + LOOKFOR +
+                        " occurs at index: " + INDEXOFQUERYFIRSTOCCURENCE +
+                        " of your dataset " + "for the first time."  +
+                        "\n" + "Sorted dataset: " + WOWITSALISTNOW);
         } );
         QUIT.addActionListener((ActionEvent ae) -> {
             System.exit(0);
